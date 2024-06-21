@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 //EXEMPLO DE NOVA ROTA
+app.get('/',(req, res) => {
+res.sendFile(path.join(__dirname, "./index.html"))})
 
 app.get('/hentai', async (req, res, next) => {
 const pasta = JSON.parse(fs.readFileSync(__dirname + '/teste.json'));
@@ -45,7 +47,7 @@ app.listen(PORT, () => {
 });
 
 //==============( ÁREA DAS ATUALIZAÇÕES )==========\\
-fs.watchFile('./api.js', (curr, prev) => {
+fs.watchFile('./rotas.js', (curr, prev) => {
 if (curr.mtime.getTime() !== prev.mtime.getTime()) {
 console.log('O arquivo index.js foi editado. Reiniciando...');
 process.exit();
